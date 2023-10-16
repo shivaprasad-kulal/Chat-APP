@@ -1,0 +1,24 @@
+.signup{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: azure;
+    height: 100vh;
+}
+.box1{
+    display: flex;
+    flex-direction: column;
+    background-color:paleturquoise;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+}
+.title{
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
