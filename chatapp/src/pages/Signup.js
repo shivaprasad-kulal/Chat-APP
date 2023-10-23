@@ -4,10 +4,24 @@ import "./Signup.css";
 const Signup = () => {
   const [User, setUser] = useState([]);
   const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (password === confirmPassword) {
+      // Passwords match, proceed with form submission
+      console.log("Passwords match. Submitting form...");
+      // Add your form submission logic here
+    } else {
+      // Passwords don't match, handle accordingly (e.g., display an error message)
+      console.log("Passwords do not match. Please try again.");
+    }
+  };
 
   const signupForm = (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="input-container">
           <input
             type="text"
@@ -46,7 +60,7 @@ const Signup = () => {
             type="password"
             placeholder="Confirm Password"
             name="pass"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             id="pass"
             required
           />
@@ -64,7 +78,9 @@ const Signup = () => {
       <div className="box1">
         <div className="title">SIGN UP</div>
         {signupForm}
-        hii
+        <div>
+         Already a member to MY CHAT ? <a href="/">  Log In</a>
+        </div>
       </div>
     </div>
   );

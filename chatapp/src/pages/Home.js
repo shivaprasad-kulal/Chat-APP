@@ -72,7 +72,7 @@ const Home = () => {
         <div className="title">LOG IN</div>
         {loginForm}
         <div className="register">
-          New to MY CHAT ?<a href="/signup"> Register</a>
+          New to MY CHAT ?<a href="/signup">Register</a>
         </div>
       </div>
     </div>
