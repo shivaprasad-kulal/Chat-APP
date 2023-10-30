@@ -26,10 +26,13 @@ Router.post("/", async (req, resp) => {
 
   try {
     const u1 = await Adduser.save();
-    resp.json(u1);
+    resp.status(200).send("OK");
   } catch (err) {
-    resp.send("error" + err);
+   
+    resp.status(500).send("Internal Server Error"+err);
   }
 });
+
+
 
 module.exports = Router;

@@ -1,21 +1,59 @@
 import React, { useState } from "react";
 import "./Signup.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const [User, setUser] = useState([]);
-  const [password, setPassword] = useState();
+  const navigate=useNavigate();
+  const [User, setUser] = useState("");
+  const [email,setEmail]=useState("");
+  const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password === confirmPassword) {
-      // Passwords match, proceed with form submission
-      console.log("Passwords match. Submitting form...");
-      // Add your form submission logic here
-    } else {
-      // Passwords don't match, handle accordingly (e.g., display an error message)
-      console.log("Passwords do not match. Please try again.");
+      
+      const data={
+        name:User,
+        password:password,
+        email:email
+      };
+      try{
+      const response=await fetch(`http://localhost:5000/user`,{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+        },
+        body:JSON.stringify(data),
+
+      });
+      if (response.ok) {
+         toast.success("Successfully Registered");
+      navigate("/");
+
+    }
+    else{
+      toast.error("User Exist");
+      setEmail("");
+      setUser("");
+      setConfirmPassword("");
+      setPassword("");      
+    }
+    
+      }
+      catch(err){
+        console.error("Error sending data",err);
+      }
+      
+
+    }
+     else {
+      toast.error("Passwords do not match. Please try again.");
+      setConfirmPassword('');
+      setPassword('');      
     }
   };
 
@@ -28,17 +66,19 @@ const Signup = () => {
             placeholder="Email"
             name="uname"
             id="username"
-            onChange={(e) => setUser(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
 
         <div className="input-container">
           <input
-            type="password"
+            type="text"
             placeholder="Name"
             name="pass"
-            onChange={(e) => setPassword(e.target.value)}
+            value={User}
+            onChange={(e) => setUser(e.target.value)}
             id="pass"
             required
           />
@@ -49,6 +89,7 @@ const Signup = () => {
             type="password"
             placeholder="Password"
             name="pass"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             id="pass"
             required
@@ -60,6 +101,7 @@ const Signup = () => {
             type="password"
             placeholder="Confirm Password"
             name="pass"
+            value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             id="pass"
             required
@@ -72,6 +114,7 @@ const Signup = () => {
       </form>
     </div>
   );
+
 
   return (
     <div className="signup">
