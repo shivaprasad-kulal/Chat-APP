@@ -59,6 +59,7 @@ input[type="submit"]:hover {
 }
 .register{
     padding-top: 2rem;
+ text-align: center;
 }
 a:link{
      color: blue;

@@ -3,7 +3,7 @@ import "./Signup.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-
+import img from "../images/logochat.png";
 const Signup = () => {
   const navigate=useNavigate();
   const [User, setUser] = useState("");
@@ -118,11 +118,12 @@ const Signup = () => {
 
   return (
     <div className="signup">
+      <img src={img} alt="logo" width="15%" />
       <div className="box1">
         <div className="title">SIGN UP</div>
         {signupForm}
         <div>
-         Already a member to MY CHAT ? <a href="/">  Log In</a>
+          Already a member to MY CHAT ? <a href="/"> Log In</a>
         </div>
       </div>
     </div>

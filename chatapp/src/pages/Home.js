@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
-import img from "../images/mychat.png";
+import img from "../images/logochat.png";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -67,7 +67,7 @@ const Home = () => {
 
   return (
     <div className="homepage">
-      <img src={img} alt="logo" width="45%" />
+      <img src={img} alt="logo" width="15%" />
       <div className="login-form">
         <div className="title">LOG IN</div>
         {loginForm}

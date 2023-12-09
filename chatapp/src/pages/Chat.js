@@ -12,51 +12,55 @@ const Chat = () => {
   }, [usenavigate]);
   //==============================================================================
   //new1
-  function UserList({ users, setSelectedUser }) {
-    return (
-      <ul>
-        {users.map((user) => (
-          <li key={user.id} onClick={() => setSelectedUser(user)}>
-            {user.name}
-          </li>
-        ))}
-      </ul>
-    );
-  }
+const usersData = [
+  { id: 1, name: "User 1", messages: ["Hi", "Hello"] },
+  { id: 2, name: "User 2", messages: ["How are you?", "Fine"] },
+  // Add more user data as needed
+];
 
-  // ChatWindow component
-  function ChatWindow({ selectedUser, messages }) {
-    return (
-      <div>
-        <h2>Chat with {selectedUser.name}</h2>
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const handleUserClick = (userId) => {
+    setSelectedUser(userId);
+  };
+
+  return (
+    <div style={{ display: "flex" }}>
+      {/* User List Column */}
+      <div style={{ flex: 1, borderRight: "1px solid #ccc", padding: "10px" }}>
+        <h2>User List</h2>
         <ul>
-          {messages.map((message) => (
-            <li key={message.id}>{message.text}</li>
+          {usersData.map((user) => (
+            <li
+              key={user.id}
+              onClick={() => handleUserClick(user.id)}
+              style={{ cursor: "pointer" }}
+            >
+              {user.name}
+            </li>
           ))}
         </ul>
       </div>
-    );
-  }
 
-  //new
-  const [selectedUser, setSelectedUser] = useState(null);
-  const users = [
-    { id: 1, name: "User 1" },
-    { id: 2, name: "User 2" },
-    // ... add more users
-  ];
-  const messages = [
-    // messages for selected user
-  ];
-
-  return (
-    <div>
-      <UserList users={users} setSelectedUser={setSelectedUser} />
-      {selectedUser && (
-        <ChatWindow selectedUser={selectedUser} messages={messages} />
-      )}
+      {/* Messages Column */}
+      <div style={{ flex: 2, padding: "10px" }}>
+        <h2>Messages</h2>
+        {selectedUser !== null ? (
+          <div>
+            <h3>{usersData[selectedUser - 1].name}'s Messages</h3>
+            <ul>
+              {usersData[selectedUser - 1].messages.map((message, index) => (
+                <li key={index}>{message}</li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <p>Select a user to see messages</p>
+        )}
+      </div>
     </div>
   );
+};
 
   /*return (
     <div>
@@ -64,7 +68,7 @@ const Chat = () => {
       <Link to="/">logout</Link>
       hii from chat
     </div>
-  );*/
-};
+  );
+};*/
 
 export default Chat;
